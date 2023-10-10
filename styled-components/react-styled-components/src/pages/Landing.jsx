@@ -1,11 +1,17 @@
+import { useSelector } from "react-redux";
 import Card from "../components/Card";
 import { MoviesContainer } from "../components/styles/LandingStyles";
+import { useGetMoviesQuery } from "../redux/api/moviesApi";
 
 const Landing = () => {
-  const movies = [];
+  const { data, error } = useGetMoviesQuery();
+  console.log(error);
   return (
     <MoviesContainer>
-      {movies.results && movies.results.map((movie) => <Card movie={movie} />)}
+      {data?.results &&
+        data?.results?.map((movie, index) => (
+          <Card key={index} movie={movie} />
+        ))}
     </MoviesContainer>
   );
 };
