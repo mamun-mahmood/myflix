@@ -1,6 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { Conatiner } from "./styles/Navbar.styles";
-import { useGetAllMoviesGenresQuery } from "../redux/api/moviesApi";
+import {
+  useGetAllMoviesGenresQuery,
+  useGetAllTvGenresQuery,
+} from "../redux/api/moviesApi";
 import styled from "styled-components";
 const Button = styled.button`
   border: none;
@@ -31,10 +34,10 @@ const Form = styled.form`
 `;
 
 const navBtns = [
-  {
-    name: "Home",
-    path: "/",
-  },
+  // {
+  //   name: "Home",
+  //   path: "/",
+  // },
   {
     name: "Movies",
     path: "/movies",
@@ -53,8 +56,8 @@ const navBtns = [
   },
 ];
 const Navbar = () => {
-  const { data, error } = useGetAllMoviesGenresQuery();
-  console.log(data, error);
+  const { data: MoviesGenres, error } = useGetAllMoviesGenresQuery();
+  const { data: TVGenres, error: TVGenresError } = useGetAllTvGenresQuery();
   const handleChange = (e) => {
     console.log(e.target.value);
   };
@@ -66,7 +69,19 @@ const Navbar = () => {
       <Conatiner>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {navBtns?.map((btn, index) => (
-            <Button key={index}>{btn.name}</Button>
+            <div class="paste-button" key={index}>
+              <button class="button">{btn.name} &nbsp; ▼</button>
+              <div class="dropdown-content">
+                {btn.name === "Movies" &&
+                  MoviesGenres?.genres?.map((genre, index) => (
+                    <Button key={index}>{genre.name}</Button>
+                  ))}
+                {btn.name === "TV Shows" &&
+                  TVGenres?.genres?.map((genre, index) => (
+                    <Button key={index}>{genre.name}</Button>
+                  ))}
+              </div>
+            </div>
           ))}
         </div>
         {/* searchbar */}
