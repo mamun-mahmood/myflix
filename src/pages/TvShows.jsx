@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetTvWithGenreQuery } from "../redux/api/moviesApi";
-import { MoviesContainer } from "../components/styles/LandingStyles";
 import Card from "../components/Card";
-import { useEffect, useState } from "react";
+import { MoviesContainer } from "../components/styles/GlobalStyles";
 const TvShows = () => {
   const { genre_id } = useParams();
   const { data, error } = useGetTvWithGenreQuery(genre_id);

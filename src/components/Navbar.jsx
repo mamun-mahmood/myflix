@@ -1,43 +1,22 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { Conatiner } from "./styles/Navbar.styles";
 import {
   useGetAllMoviesGenresQuery,
   useGetAllTvGenresQuery,
+  useLazyGetKeyWordsByNameQuery,
+  useLazyGetSearchMultiQuery,
 } from "../redux/api/moviesApi";
-import styled from "styled-components";
-const Button = styled.button`
-  border: none;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  &:hover {
-  }
-`;
-const SearchBar = styled.input`
-  border: none;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  &:hover {
-  }
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
+import {
+  NavButton,
+  Button,
+  Form,
+  SearchBar,
+  Logo,
+  Conatiner,
+  SuggestionContainer,
+} from "./styles/Navbar.styles";
+import { useEffect, useRef, useState } from "react";
+import MovieSuggestionCard from "./MovieSuggestionCard";
 const navBtns = [
-  // {
-  //   name: "Home",
-  //   path: "/",
-  // },
   {
     name: "Movies",
     path: "/movies",
@@ -55,25 +34,69 @@ const navBtns = [
     path: "/more",
   },
 ];
-const Logo = styled.img`
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-`;
+
 const Navbar = () => {
   const { data: MoviesGenres, error } = useGetAllMoviesGenresQuery();
   const { data: TVGenres, error: TVGenresError } = useGetAllTvGenresQuery();
+  if (error || TVGenresError) {
+    console.log(error, TVGenresError);
+  }
+  const {} = useLazyGetKeyWordsByNameQuery();
+  const [trigger, data] = useLazyGetSearchMultiQuery();
   const handleChange = (e) => {
     console.log(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const query = formData.get("query");
+    trigger(query);
   };
   const navigate = useNavigate();
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const searchbarRef = useRef(null);
+  // set openDropdown to true if searchbar is focused
+  const handleFocus = () => {
+    setOpenDropdown(true);
+  };
+  // set openDropdown to false if searchbar is not focused
+  const handleBlur = () => {
+    setOpenDropdown(false);
+  };
+  const { data: { results = [] } = {} } = data;
+  console.log(results);
   return (
     <>
       <Conatiner>
         <Logo src="/images/logo.svg" onClick={() => navigate(`/`)} alt="logo" />
+        <Form onSubmit={handleSubmit}>
+          <div className="container">
+            <div className="search-container">
+              <input
+                onFocus={handleFocus}
+                // onBlur={handleBlur}
+                ref={searchbarRef}
+                onChange={handleChange}
+                placeholder="Search"
+                className="input"
+                type="text"
+                name="query"
+              />
+              <svg viewBox="0 0 24 24" className="search__icon">
+                <g>
+                  <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                </g>
+              </svg>
+            </div>
+            {openDropdown && (
+              <SuggestionContainer>
+                {results?.map((e, index) => (
+                  <MovieSuggestionCard data={e} key={index} />
+                ))}
+              </SuggestionContainer>
+            )}
+          </div>
+        </Form>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {navBtns?.map((btn, index) => (
             <div className="paste-button" key={index}>
@@ -81,30 +104,27 @@ const Navbar = () => {
               <div className="dropdown-content">
                 {btn.name === "Movies" &&
                   MoviesGenres?.genres?.map((genre, index) => (
-                    <Button
+                    <NavButton
                       key={index}
                       onClick={() => navigate(`/movies/${genre.id}`)}
                     >
                       {genre.name}
-                    </Button>
+                    </NavButton>
                   ))}
                 {btn.name === "TV Shows" &&
                   TVGenres?.genres?.map((genre, index) => (
-                    <Button
+                    <NavButton
                       key={index}
                       onClick={() => navigate(`/tv/${genre.id}`)}
                     >
                       {genre.name}
-                    </Button>
+                    </NavButton>
                   ))}
               </div>
             </div>
           ))}
         </div>
         {/* searchbar */}
-        <Form onSubmit={handleSubmit}>
-          <SearchBar type="text" onChange={handleChange} placeholder="Search" />
-        </Form>
       </Conatiner>
       <Outlet />
     </>

@@ -30,6 +30,12 @@ export const moviesApi = createApi({
     getTvWithGenre: builder.query({
       query: (genre_id) => `/discover/tv?with_genres=${genre_id}`,
     }),
+    getKeyWordsByName: builder.query({
+      query: (name) => `/search/keyword?query=${name}`,
+    }),
+    getSearchMulti: builder.query({
+      query: (name) => `/search/multi?query=${name}`,
+    }),
   }),
 });
 export const {
@@ -40,4 +46,6 @@ export const {
   useGetAllTvGenresQuery,
   useGetMoviesWithGenreQuery,
   useGetTvWithGenreQuery,
+  useLazyGetKeyWordsByNameQuery,
+  useLazyGetSearchMultiQuery,
 } = moviesApi;
