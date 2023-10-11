@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Conatiner } from "./styles/Navbar.styles";
 import {
   useGetAllMoviesGenresQuery,
@@ -64,21 +64,33 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  const navigate = useNavigate();
   return (
     <>
       <Conatiner>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <button onClick={() => navigate(`/`)}>Logo</button>
           {navBtns?.map((btn, index) => (
-            <div class="paste-button" key={index}>
-              <button class="button">{btn.name} &nbsp; ▼</button>
-              <div class="dropdown-content">
+            <div className="paste-button" key={index}>
+              <button className="button">{btn.name} &nbsp; ▼</button>
+              <div className="dropdown-content">
                 {btn.name === "Movies" &&
                   MoviesGenres?.genres?.map((genre, index) => (
-                    <Button key={index}>{genre.name}</Button>
+                    <Button
+                      key={index}
+                      onClick={() => navigate(`/movies/${genre.id}`)}
+                    >
+                      {genre.name}
+                    </Button>
                   ))}
                 {btn.name === "TV Shows" &&
                   TVGenres?.genres?.map((genre, index) => (
-                    <Button key={index}>{genre.name}</Button>
+                    <Button
+                      key={index}
+                      onClick={() => navigate(`/tv/${genre.id}`)}
+                    >
+                      {genre.name}
+                    </Button>
                   ))}
               </div>
             </div>

@@ -24,6 +24,9 @@ export const moviesApi = createApi({
     getNowPlaying: builder.query({
       query: () => `/movie/now_playing`,
     }),
+    getMoviesWithGenre: builder.query({
+      query: (genre_id) => `/discover/movie?with_genres=${genre_id}`,
+    }),
   }),
 });
 export const {
@@ -32,4 +35,5 @@ export const {
   useGetNowPlayingQuery,
   useGetAllMoviesGenresQuery,
   useGetAllTvGenresQuery,
+  useGetMoviesWithGenreQuery,
 } = moviesApi;
