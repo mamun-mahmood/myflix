@@ -4,7 +4,7 @@ import { MoviesContainer } from "../components/styles/LandingStyles";
 import { useGetMoviesQuery } from "../redux/api/moviesApi";
 
 const Landing = () => {
-  const { data, error } = useGetMoviesQuery();
+  const { data, error } = useGetMoviesQuery("all");
   console.log(error);
   return (
     <MoviesContainer>
