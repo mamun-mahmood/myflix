@@ -11,7 +11,9 @@ const Movies = () => {
   useEffect(() => {
     setMovies(data?.results);
   }, [data]);
-  console.log(data?.results[0]);
+  if (error) {
+    console.log(error);
+  }
   return (
     <>
       <h1>{genre_id}</h1>

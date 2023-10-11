@@ -5,7 +5,9 @@ import { useGetMoviesQuery } from "../redux/api/moviesApi";
 
 const Landing = () => {
   const { data, error } = useGetMoviesQuery("now_playing");
-  console.log(error);
+  if (error) {
+    console.log(error);
+  }
   return (
     <MoviesContainer>
       {data?.results &&
