@@ -55,6 +55,11 @@ const navBtns = [
     path: "/more",
   },
 ];
+const Logo = styled.img`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+`;
 const Navbar = () => {
   const { data: MoviesGenres, error } = useGetAllMoviesGenresQuery();
   const { data: TVGenres, error: TVGenresError } = useGetAllTvGenresQuery();
@@ -68,8 +73,8 @@ const Navbar = () => {
   return (
     <>
       <Conatiner>
+        <Logo src="/images/logo.svg" onClick={() => navigate(`/`)} alt="logo" />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          <button onClick={() => navigate(`/`)}>Logo</button>
           {navBtns?.map((btn, index) => (
             <div className="paste-button" key={index}>
               <button className="button">{btn.name} &nbsp; ▼</button>
