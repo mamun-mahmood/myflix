@@ -116,7 +116,7 @@ const SuggestionContainer = styled.div`
   border-radius: 0px 0px 1rem 1rem;
   transition: all 0.3s ease-in-out;
   transform-origin: top;
-  height: 90vh;
+  max-height: 90vh;
   overflow-y: scroll;
 `;
 const MovieSuggestionContainer = styled.div`

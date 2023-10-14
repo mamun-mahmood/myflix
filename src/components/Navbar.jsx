@@ -44,7 +44,11 @@ const Navbar = () => {
   const {} = useLazyGetKeyWordsByNameQuery();
   const [trigger, data] = useLazyGetSearchMultiQuery();
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // after 1 second, trigger the query
+    setTimeout(() => {
+      const query = e.target.value;
+      trigger(query);
+    }, 2000);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +92,7 @@ const Navbar = () => {
                 </g>
               </svg>
             </div>
-            {openDropdown && (
+            {openDropdown && results && (
               <SuggestionContainer>
                 {results?.map((e, index) => (
                   <MovieSuggestionCard data={e} key={index} />
