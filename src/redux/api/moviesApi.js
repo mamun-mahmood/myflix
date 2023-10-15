@@ -10,7 +10,7 @@ export const moviesApi = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: (type) => `/movie/${type}`,
+      query: (type, page) => `/movie/${type}?page=${page}`,
     }),
     getImages: builder.query({
       query: (movie_id) => `/movie/${movie_id}/images}`,

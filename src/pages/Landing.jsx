@@ -3,7 +3,7 @@ import { useGetMoviesQuery } from "../redux/api/moviesApi";
 import { MoviesContainer } from "../components/styles/GlobalStyles";
 
 const Landing = () => {
-  const { data, error } = useGetMoviesQuery("now_playing");
+  const { data, error } = useGetMoviesQuery("now_playing", "2");
   if (error) {
     console.log(error);
   }

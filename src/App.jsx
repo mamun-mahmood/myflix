@@ -16,11 +16,11 @@ function App() {
           element: <Landing />,
         },
         {
-          path: "movies/:genre_id",
+          path: "movies/:genre_name",
           element: <Movies />,
         },
         {
-          path: "tv/:genre_id",
+          path: "tv/:genre_name",
           element: <TvShows />,
         },
         {

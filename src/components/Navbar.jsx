@@ -14,7 +14,7 @@ import {
   Conatiner,
   SuggestionContainer,
 } from "./styles/Navbar.styles";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import MovieSuggestionCard from "./MovieSuggestionCard";
 const navBtns = [
   {
@@ -25,14 +25,14 @@ const navBtns = [
     name: "TV Shows",
     path: "/tv",
   },
-  {
-    name: "People",
-    path: "/people",
-  },
-  {
-    name: "More",
-    path: "/more",
-  },
+  // {
+  //   name: "People",
+  //   path: "/people",
+  // },
+  // {
+  //   name: "More",
+  //   path: "/more",
+  // },
 ];
 
 const Navbar = () => {
@@ -58,7 +58,6 @@ const Navbar = () => {
   };
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState(false);
-  const searchbarRef = useRef(null);
   // set openDropdown to true if searchbar is focused
   const handleFocus = () => {
     setOpenDropdown(true);
@@ -78,8 +77,7 @@ const Navbar = () => {
             <div className="search-container">
               <input
                 onFocus={handleFocus}
-                // onBlur={handleBlur}
-                ref={searchbarRef}
+                onBlur={handleBlur}
                 onChange={handleChange}
                 placeholder="Search"
                 className="input"
@@ -101,7 +99,7 @@ const Navbar = () => {
             )}
           </div>
         </Form>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", paddingRight: 50 }}>
           {navBtns?.map((btn, index) => (
             <div className="paste-button" key={index}>
               <button className="button">{btn.name} &nbsp; ▼</button>
@@ -110,7 +108,7 @@ const Navbar = () => {
                   MoviesGenres?.genres?.map((genre, index) => (
                     <NavButton
                       key={index}
-                      onClick={() => navigate(`/movies/${genre.id}`)}
+                      onClick={() => navigate(`/movies/${genre.name}`)}
                     >
                       {genre.name}
                     </NavButton>
@@ -119,7 +117,7 @@ const Navbar = () => {
                   TVGenres?.genres?.map((genre, index) => (
                     <NavButton
                       key={index}
-                      onClick={() => navigate(`/tv/${genre.id}`)}
+                      onClick={() => navigate(`/tv/${genre.name}`)}
                     >
                       {genre.name}
                     </NavButton>
