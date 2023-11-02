@@ -25,14 +25,6 @@ const navBtns = [
     name: "TV Shows",
     path: "/tv",
   },
-  // {
-  //   name: "People",
-  //   path: "/people",
-  // },
-  // {
-  //   name: "More",
-  //   path: "/more",
-  // },
 ];
 
 const Navbar = () => {
@@ -67,7 +59,6 @@ const Navbar = () => {
     setOpenDropdown(false);
   };
   const { data: { results = [] } = {} } = data;
-  console.log(results);
   return (
     <>
       <Conatiner>

@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const Card = ({ movie }) => {
   const {
     title,
@@ -14,8 +16,9 @@ const Card = ({ movie }) => {
     genre_ids,
     adult,
   } = movie;
+  const navigate = useNavigate();
   return (
-    <div className="card">
+    <div className="card" onClick={() => navigate(`/movie/${title}`)}>
       {backdrop_path ? (
         <img src={`http://image.tmdb.org/t/p/w500/${backdrop_path}`} alt="" />
       ) : (

@@ -10,7 +10,16 @@ export const moviesApi = createApi({
   }),
   endpoints: (builder) => ({
     getMovies: builder.query({
-      query: (type, page) => `/movie/${type}?page=${page}`,
+      query: ({ type, page }) => `/movie/${type}?page=${page}`,
+      providesTags: (result, error, page) => {
+        if (error || !result) {
+          return [{ type: "Movies", id: "LIST" }];
+        }
+        return [
+          ...result.results.map(({ id }) => ({ type: "Movies", id })),
+          { type: "Movies", id: "LIST" },
+        ];
+      },
     }),
     getImages: builder.query({
       query: (movie_id) => `/movie/${movie_id}/images}`,
@@ -36,6 +45,12 @@ export const moviesApi = createApi({
     getSearchMulti: builder.query({
       query: (name) => `/search/multi?query=${name}`,
     }),
+    getMovieVideos: builder.query({
+      query: (movie_id) => `/movie/${movie_id}/videos`,
+    }),
+    getTvVideos: builder.query({
+      query: (tv_id) => `/tv/${tv_id}/videos`,
+    }),
   }),
 });
 export const {
@@ -48,4 +63,6 @@ export const {
   useGetTvWithGenreQuery,
   useLazyGetKeyWordsByNameQuery,
   useLazyGetSearchMultiQuery,
+  useGetMovieVideosQuery,
+  useGetTvVideosQuery,
 } = moviesApi;

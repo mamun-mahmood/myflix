@@ -8,15 +8,16 @@ export const GlobalStyles = createGlobalStyle`
     // font-family: 'Source Sans Pro', sans-serif;
     font-family: 'Roboto', sans-serif;
 `;
-export const MoviesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 1rem 0rem;
-  align-items: center;
-  align-content: space-around;
-  width: 100%;
-  height: 100%;
-  // margin: 0 auto;
-  padding: 0.5rem 0rem;
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding: 1rem;
+  gap: 1rem;
+`;
+export const PageTitle = styled.h1`
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 1rem;
+  margin-bottom: 0;
 `;

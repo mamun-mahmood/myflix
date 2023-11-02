@@ -4,7 +4,7 @@ import {
   useGetMoviesWithGenreQuery,
 } from "../redux/api/moviesApi";
 import Card from "../components/Card";
-import { MoviesContainer } from "../components/styles/GlobalStyles";
+import { GridContainer, PageTitle } from "../components/styles/GlobalStyles";
 
 const Movies = () => {
   const { genre_name } = useParams();
@@ -18,13 +18,13 @@ const Movies = () => {
   }
   return (
     <>
-      <h1>{genre_name}</h1>
-      <MoviesContainer>
+      <PageTitle>{genre_name}</PageTitle>
+      <GridContainer>
         {data?.results &&
           data?.results.map((movie, index) => (
             <Card key={index} movie={movie} />
           ))}
-      </MoviesContainer>
+      </GridContainer>
     </>
   );
 };

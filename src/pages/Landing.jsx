@@ -1,19 +1,21 @@
 import Card from "../components/Card";
+import { GridContainer } from "../components/styles/GlobalStyles";
 import { useGetMoviesQuery } from "../redux/api/moviesApi";
-import { MoviesContainer } from "../components/styles/GlobalStyles";
-
 const Landing = () => {
-  const { data, error } = useGetMoviesQuery("now_playing", "2");
+  const { data, error } = useGetMoviesQuery({
+    page: 5,
+    type: "popular",
+  });
   if (error) {
     console.log(error);
   }
   return (
-    <MoviesContainer>
+    <GridContainer>
       {data?.results &&
         data?.results?.map((movie, index) => (
           <Card key={index} movie={movie} />
         ))}
-    </MoviesContainer>
+    </GridContainer>
   );
 };
 

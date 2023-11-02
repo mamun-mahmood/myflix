@@ -4,7 +4,7 @@ import {
   useGetTvWithGenreQuery,
 } from "../redux/api/moviesApi";
 import Card from "../components/Card";
-import { MoviesContainer } from "../components/styles/GlobalStyles";
+import { GridContainer, PageTitle } from "../components/styles/GlobalStyles";
 const TvShows = () => {
   const { genre_name } = useParams();
   const { data: TVGenres } = useGetAllTvGenresQuery();
@@ -17,13 +17,13 @@ const TvShows = () => {
   }
   return (
     <>
-      <h1>{genre_name}</h1>
-      <MoviesContainer>
+      <PageTitle>{genre_name}</PageTitle>
+      <GridContainer>
         {data?.results &&
           data.results.map((movie, index) => (
             <Card key={index} movie={{ ...movie, title: movie.name }} />
           ))}
-      </MoviesContainer>
+      </GridContainer>
     </>
   );
 };
