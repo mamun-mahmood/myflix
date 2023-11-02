@@ -12,8 +12,8 @@ const Landing = () => {
   return (
     <GridContainer>
       {data?.results &&
-        data?.results?.map((movie, index) => (
-          <Card key={index} movie={movie} />
+        data?.results?.map(({ title, overview, backdrop_path }, index) => (
+          <Card key={index} {...{ title, overview, backdrop_path }} />
         ))}
     </GridContainer>
   );

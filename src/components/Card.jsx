@@ -1,24 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ movie }) => {
-  const {
-    title,
-    overview,
-    backdrop_path,
-    poster_path,
-    release_date,
-    vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    original_language,
-    id,
-    genre_ids,
-    adult,
-  } = movie;
+const Card = ({ title, overview, backdrop_path }) => {
   const navigate = useNavigate();
   return (
-    <div className="card" onClick={() => navigate(`/movie/${title}`)}>
+    <div
+      className="card"
+      onClick={() => navigate(`/movie/${encodeURIComponent(title)}`)}
+    >
       {backdrop_path ? (
         <img src={`http://image.tmdb.org/t/p/w500/${backdrop_path}`} alt="" />
       ) : (
