@@ -54,8 +54,25 @@ const Landing = () => {
       moreRef.current.disabled = false;
     });
   };
+  useEffect(() => {
+    document.title = "Home/Popular - MyFlix";
+  //  set meta
+    const meta = document.createElement("meta");
+    meta.name = "description";
+    meta.content = "Home/Popular - MyFlix";
+    document.getElementsByTagName("head")[0].appendChild(meta);
+    // set og meta
+    const ogMeta = document.createElement("meta");
+    ogMeta.property = "og:description";
+    ogMeta.content = "Home/Popular - MyFlix";
+    document.getElementsByTagName("head")[0].appendChild(ogMeta);
+    // image
+    const ogImage = document.createElement("meta");
+    ogImage.property = "og:image";
+    ogImage.content = "https://myflix-lake-six.vercel.app/images/logo.svg";
+  }, []);
   return (
-    <GridContainer>
+    <GridContainer >
       {data.map(({ title, overview, backdrop_path, id }) => (
         <Card key={id} {...{ title, overview, backdrop_path, id }} />
       ))}
