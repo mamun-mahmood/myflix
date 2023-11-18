@@ -16,13 +16,13 @@ const Movies = () => {
   if (error) {
     console.log(error);
   }
+  const { results = [] } = data || {};
   return (
     <>
       <PageTitle>{genre_name}</PageTitle>
       <GridContainer>
-        {data?.results &&
-          data?.results.map((movie, index) => (
-            <Card key={index} movie={movie} />
+        {results.map(({title, overview, backdrop_path, id}) => (
+            <Card key={id} {...{title, overview, backdrop_path, id}} />
           ))}
       </GridContainer>
     </>

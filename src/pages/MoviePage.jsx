@@ -34,8 +34,7 @@ const MoviePage = () => {
   const [trigger, { data: videos }] = useLazyGetMovieVideosQuery();
   useEffect(() => {
       trigger(id);
-    
-  }, [id]);
+  }, [id, trigger]);
   const { key, site } = videos?.results[0] || {};
 
   return (
