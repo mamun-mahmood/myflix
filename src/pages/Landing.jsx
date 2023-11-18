@@ -1,6 +1,6 @@
 import Card from "../components/Card";
 import { GridContainer } from "../components/styles/GlobalStyles";
-import { useGetMoviesQuery } from "../redux/api/moviesApi";
+import { useGetMoviesQuery } from "../redux/api/index";
 const Landing = () => {
   const { data, error } = useGetMoviesQuery({
     page: 5,
@@ -12,8 +12,8 @@ const Landing = () => {
   return (
     <GridContainer>
       {data?.results &&
-        data?.results?.map(({ title, overview, backdrop_path }, index) => (
-          <Card key={index} {...{ title, overview, backdrop_path }} />
+        data?.results?.map(({ title, overview, backdrop_path, id }, index) => (
+          <Card key={index} {...{ title, overview, backdrop_path, id }} />
         ))}
     </GridContainer>
   );

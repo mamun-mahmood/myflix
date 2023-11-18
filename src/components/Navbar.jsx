@@ -4,7 +4,7 @@ import {
   useGetAllTvGenresQuery,
   useLazyGetKeyWordsByNameQuery,
   useLazyGetSearchMultiQuery,
-} from "../redux/api/moviesApi";
+} from "../redux/api/index";
 import {
   NavButton,
   Button,

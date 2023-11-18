@@ -51,6 +51,9 @@ export const moviesApi = createApi({
     getTvVideos: builder.query({
       query: (tv_id) => `/tv/${tv_id}/videos`,
     }),
+    getMovieById: builder.query({
+      query: (movie_id) => `/movie/${movie_id}`,
+    }),
   }),
 });
 export const {
@@ -63,6 +66,7 @@ export const {
   useGetTvWithGenreQuery,
   useLazyGetKeyWordsByNameQuery,
   useLazyGetSearchMultiQuery,
-  useGetMovieVideosQuery,
+  useLazyGetMovieVideosQuery,
   useGetTvVideosQuery,
+  useGetMovieByIdQuery,
 } = moviesApi;

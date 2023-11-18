@@ -2,9 +2,11 @@ import Navbar from "./components/Navbar";
 import { GlobalStyles } from "./components/styles/GlobalStyles";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Movies from "./pages/Movies";
 import TvShows from "./pages/TvShows";
 import MoviePage from "./pages/MoviePage";
+import { lazy, Suspense } from "react";
+const Movies = lazy(() => import("./pages/Movies"));
+
 
 function App() {
   const router = createBrowserRouter([
@@ -18,18 +20,18 @@ function App() {
         },
         {
           path: "movies/:genre_name",
-          element: <Movies />,
+          element: <Suspense fallback={<div>Loading...</div>}><Movies /></Suspense>,
         },
         {
           path: "tv/:genre_name",
           element: <TvShows />,
         },
         {
-          path: "movie/:title",
+          path: "movie/:id",
           element: <MoviePage />,
         },
         {
-          path: "tv/:title",
+          path: "tv/:id",
           element: <Landing />,
         },
       ],

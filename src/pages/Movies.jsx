@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import {
   useGetAllMoviesGenresQuery,
   useGetMoviesWithGenreQuery,
-} from "../redux/api/moviesApi";
+} from "../redux/api/index";
 import Card from "../components/Card";
 import { GridContainer, PageTitle } from "../components/styles/GlobalStyles";
 
