@@ -22,6 +22,7 @@ const Landing = () => {
     });
   }, [trigger]);
   const moreRef = useRef(null);
+  const data = results.data
   useEffect(() => {
     const options = {
       root: null,
@@ -35,8 +36,8 @@ const Landing = () => {
         }
       });
     }, options);
-    if (results.data.length) observer.observe(moreRef.current);
-  }, [results.data]);
+    if (data.length) observer.observe(moreRef.current);
+  }, [data]);
   const handleMore = () => {
     moreRef.current.disabled = true;
     trigger({
@@ -55,10 +56,10 @@ const Landing = () => {
   };
   return (
     <GridContainer>
-      {results.data.map(({ title, overview, backdrop_path, id }) => (
+      {data.map(({ title, overview, backdrop_path, id }) => (
         <Card key={id} {...{ title, overview, backdrop_path, id }} />
       ))}
-      {results.data.length && (
+      {data.length && (
         <button ref={moreRef} onClick={handleMore}>
           More
         </button>

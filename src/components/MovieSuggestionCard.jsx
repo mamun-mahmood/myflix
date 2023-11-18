@@ -5,23 +5,20 @@ const MovieSuggestionCard = ({ data }) => {
   const {
     title,
     name,
-    overview,
     backdrop_path,
     poster_path,
     release_date,
     vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    original_language,
     id,
-    genre_ids,
-    adult,
     media_type,
   } = data;
   const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/${media_type}/${id}`);
+    console.log("clicked", id);
+  }
   return (
-    <MovieSuggestionContainer onClick={() => navigate(`/${media_type}/${id}`)}>
+    <MovieSuggestionContainer onClick={handleClick} >
       <img
         src={
           poster_path
@@ -30,7 +27,7 @@ const MovieSuggestionCard = ({ data }) => {
         }
         alt={title}
       />
-      <div>
+      <div >
         <h4>{title || name}</h4>
         <p>{release_date}</p>
         <p>{vote_average}</p>

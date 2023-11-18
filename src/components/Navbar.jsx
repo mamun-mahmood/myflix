@@ -5,7 +5,7 @@ import {
   useLazyGetSearchMultiQuery,
 } from "../redux/api/index";
 import { Form, Logo, Conatiner, SuggestionContainer, Select, Option } from "./styles/Navbar.styles";
-import { useState } from "react";
+import {  useState } from "react";
 import MovieSuggestionCard from "./MovieSuggestionCard";
 const navBtns = [
   {
@@ -24,7 +24,6 @@ const Navbar = () => {
   if (error || TVGenresError) {
     console.log(error, TVGenresError);
   }
-  // const {} = useLazyGetKeyWordsByNameQuery();
   const [trigger, data] = useLazyGetSearchMultiQuery();
   const handleChange = (e) => {
     // after 1 second, trigger the query
@@ -41,26 +40,26 @@ const Navbar = () => {
   };
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState(false);
-  // set openDropdown to true if searchbar is focused
   const handleFocus = () => {
     setOpenDropdown(true);
   };
-  // set openDropdown to false if searchbar is not focused
   const handleBlur = () => {
-    setOpenDropdown(false);
+    setTimeout(() => {
+      setOpenDropdown(false);
+    }
+    , 200);
   };
   const { data: { results = [] } = {} } = data;
   const handleSelect = (e) => {
     const value = e.target.value;
     navigate(value);
-    console.log(value);
   };
 
   return (
     <>
       <Conatiner>
         <Logo src="/images/logo.svg" onClick={() => navigate(`/`)} alt="logo" />
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} >
           <div className="container">
             <div className="search-container">
               <input
