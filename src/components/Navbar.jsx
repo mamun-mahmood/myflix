@@ -4,7 +4,7 @@ import {
   useGetAllTvGenresQuery,
   useLazyGetSearchMultiQuery,
 } from "../redux/api/index";
-import { NavButton, Form, Logo, Conatiner, SuggestionContainer } from "./styles/Navbar.styles";
+import { Form, Logo, Conatiner, SuggestionContainer, Select, Option } from "./styles/Navbar.styles";
 import { useState } from "react";
 import MovieSuggestionCard from "./MovieSuggestionCard";
 const navBtns = [
@@ -50,6 +50,12 @@ const Navbar = () => {
     setOpenDropdown(false);
   };
   const { data: { results = [] } = {} } = data;
+  const handleSelect = (e) => {
+    const value = e.target.value;
+    navigate(value);
+    console.log(value);
+  };
+
   return (
     <>
       <Conatiner>
@@ -83,29 +89,20 @@ const Navbar = () => {
         </Form>
         <div style={{ display: "flex", flexWrap: "wrap", paddingRight: 50 }}>
           {navBtns?.map((btn, index) => (
-            <div className="paste-button" key={index}>
-              <button className="button">{btn.name} &nbsp; ▼</button>
-              <div className="dropdown-content">
-                {btn.name === "Movies" &&
-                  MoviesGenres?.genres?.map((genre, index) => (
-                    <NavButton
-                      key={index}
-                      onClick={() => navigate(`/movies/${genre.name}`)}
-                    >
-                      {genre.name}
-                    </NavButton>
-                  ))}
-                {btn.name === "TV Shows" &&
-                  TVGenres?.genres?.map((genre, index) => (
-                    <NavButton
-                      key={index}
-                      onClick={() => navigate(`/tv/${genre.name}`)}
-                    >
-                      {genre.name}
-                    </NavButton>
-                  ))}
-              </div>
-            </div>
+            <Select key={index} onChange={handleSelect}>
+              {btn.name === "Movies" &&
+                MoviesGenres?.genres?.map((genre, index) => (
+                  <Option value={`/movies/${genre.id}`} key={index}>
+                    {genre.name}
+                  </Option>
+                ))}
+              {btn.name === "TV Shows" &&
+                TVGenres?.genres?.map((genre, index) => (
+                  <Option value={`/tv/${genre.id}`} key={index}>
+                    {genre.name}
+                  </Option>
+                ))}
+            </Select>
           ))}
         </div>
         {/* searchbar */}

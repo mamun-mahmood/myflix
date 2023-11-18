@@ -137,6 +137,20 @@ const MovieSuggestionContainer = styled.div`
     color: #212121;
   }
 `;
+const Select = styled.select`
+  border: none;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  &:hover {
+    color: #4caf50;
+  }
+`;
+const Option = styled.option`
+  color: #4caf50;
+`;
 export {
   NavButton,
   PasteButton,
@@ -151,4 +165,6 @@ export {
   Logo,
   SuggestionContainer,
   MovieSuggestionContainer,
+  Select,
+  Option,
 };

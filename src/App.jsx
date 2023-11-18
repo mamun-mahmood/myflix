@@ -19,11 +19,11 @@ function App() {
           element: <Landing />,
         },
         {
-          path: "movies/:genre_name",
+          path: "movies/:id",
           element: <Suspense fallback={<div>Loading...</div>}><Movies /></Suspense>,
         },
         {
-          path: "tv/:genre_name",
+          path: "tv/:id",
           element: <TvShows />,
         },
         {
