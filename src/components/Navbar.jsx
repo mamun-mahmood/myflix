@@ -2,18 +2,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {
   useGetAllMoviesGenresQuery,
   useGetAllTvGenresQuery,
-  useLazyGetKeyWordsByNameQuery,
   useLazyGetSearchMultiQuery,
 } from "../redux/api/index";
-import {
-  NavButton,
-  Button,
-  Form,
-  SearchBar,
-  Logo,
-  Conatiner,
-  SuggestionContainer,
-} from "./styles/Navbar.styles";
+import { NavButton, Form, Logo, Conatiner, SuggestionContainer } from "./styles/Navbar.styles";
 import { useState } from "react";
 import MovieSuggestionCard from "./MovieSuggestionCard";
 const navBtns = [
@@ -33,7 +24,7 @@ const Navbar = () => {
   if (error || TVGenresError) {
     console.log(error, TVGenresError);
   }
-  const {} = useLazyGetKeyWordsByNameQuery();
+  // const {} = useLazyGetKeyWordsByNameQuery();
   const [trigger, data] = useLazyGetSearchMultiQuery();
   const handleChange = (e) => {
     // after 1 second, trigger the query

@@ -11,15 +11,6 @@ export const moviesApi = createApi({
   endpoints: (builder) => ({
     getMovies: builder.query({
       query: ({ type, page }) => `/movie/${type}?page=${page}`,
-      providesTags: (result, error, page) => {
-        if (error || !result) {
-          return [{ type: "Movies", id: "LIST" }];
-        }
-        return [
-          ...result.results.map(({ id }) => ({ type: "Movies", id })),
-          { type: "Movies", id: "LIST" },
-        ];
-      },
     }),
     getImages: builder.query({
       query: (movie_id) => `/movie/${movie_id}/images}`,
@@ -57,7 +48,7 @@ export const moviesApi = createApi({
   }),
 });
 export const {
-  useGetMoviesQuery,
+  useLazyGetMoviesQuery,
   useGetImagesQuery,
   useGetNowPlayingQuery,
   useGetAllMoviesGenresQuery,

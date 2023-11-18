@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+// eslint-disable-next-line react/prop-types
 const Card = ({ title, overview, backdrop_path, id }) => {
   const navigate = useNavigate();
   return (
