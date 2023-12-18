@@ -2,10 +2,10 @@
 
 # Movie & TV Shows App
 
-![App Screen](./public/ss/p1.png)
-![App Screen](./public/ss/p2.png)
-![App Screen](./public/ss/p3.png)
-![App Screen](./public/ss/p4.png)
+![App Screen](./public/ss/1.png)
+![App Screen](./public/ss/2.png)
+![App Screen](./public/ss/3.png)
+![App Screen](./public/ss/4.png)
 
 ## Introduction
  - A movie and tv shows app with The Movie DB API .
